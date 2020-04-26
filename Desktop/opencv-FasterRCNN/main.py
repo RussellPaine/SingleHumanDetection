@@ -45,6 +45,6 @@ while True:
             cv2.rectangle(frame, (startX, startY), (endX, endY), color, 2)
             text = "{}: {:.4f}".format(LABELS[classID], confidence)
             cv2.putText(frame, text, (startX, startY - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-            cv2.imshow('frame', frame)
+    cv2.imshow('frame', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

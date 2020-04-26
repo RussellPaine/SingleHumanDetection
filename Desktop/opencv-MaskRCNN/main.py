@@ -16,6 +16,9 @@ configPath = os.path.join(os.getcwd(), "model", "config.pbtxt")
 print("[INFO] loading mask R-CNN from disk...")
 net = cv2.dnn.readNetFromTensorflow(weightsPath, configPath)
 
+net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+
 capture = cv2.VideoCapture(0)
 writer = None
 
