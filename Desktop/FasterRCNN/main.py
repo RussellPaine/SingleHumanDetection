@@ -35,10 +35,12 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
 frame_rate_calc = 1
 freq = cv2.getTickFrequency()
-font = cv2.FONT_HERSHEY_SIMPLEX
 
 camera = cv2.VideoCapture(0)
+ret = camera.set(3,1280)
+ret = camera.set(4,720)
 while(True):
+
 	t1 = cv2.getTickCount()
 	ret, frame = camera.read()
 
@@ -54,19 +56,23 @@ while(True):
 	classes = np.squeeze(classes).astype(np.int32)
 	scores = np.squeeze(scores)
 
+	height, width = frame.shape[:2]
 
 	for i in range(boxes.shape[0]):
+		if classes[i] != 1:
+			continue
 		if scores[i] > 0.85:
-			box = tuple(boxes[i].tolist())
-			outString = ''
-			className = LABELS[classes[i]]
-			outString = str(className)
-			outString = '{}: {}%'.format(outString, int(100*scores[i]))
+			
+			label = '{}: {}%'.format(LABELS[classes[i]], int(100*scores[i]))
+			y1, x1, y2, x2 = boxes[i] * np.array([height, width, height, width])
 			color= COLORS[classes[i]]
+			color = [int(c) for c in color]
 
+			cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
+			cv2.putText(frame, label, (int(x1), int(y1) - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-
-	cv2.putText(frame,"FPS: {0:.2f}".format(frame_rate_calc),(30,50),font,1,(255,255,0),2,cv2.LINE_AA)
+	
+	cv2.putText(frame, "{0:.2f}".format(frame_rate_calc), (30,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,0), 1, cv2.LINE_AA)
 	cv2.imshow('frame', frame)
 
 	t2 = cv2.getTickCount()
