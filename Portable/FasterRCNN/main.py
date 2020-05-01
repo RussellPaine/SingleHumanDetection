@@ -29,8 +29,9 @@ if  __name__ == "__main__":
     out_blob = next(iter(net.outputs))
     print(out_blob)
     n, c, h, w = net.inputs[input_blob].shape
-    if img_info_input_blob:
-        feed_dict[img_info_input_blob] = [h, w, 1]
+    
+    #if img_info_input_blob:
+        #feed_dict[img_info_input_blob] = [h, w, 1]
         
     print(net.inputs[input_blob].shape)
     exec_net = plugin.load(network=net)
@@ -65,6 +66,7 @@ if  __name__ == "__main__":
             inf_time = end - start
             print('Inference Time: {} Seconds Single Image'.format(inf_time))
             res = exec_net.requests[cur_request_id].outputs[out_blob]
+            #print(res)
             for obj in res[0][0]:
                 # Draw only objects when probability more than specified threshold
                 if obj[2] > 0.85:
