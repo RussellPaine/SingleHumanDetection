@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <net batch="1" name="frozen_inference_graph" version="6">
 	<layers>
-		<layer id="0" name="image_tensor" precision="FP32" type="Input">
+		<layer id="0" name="image_tensor" precision="FP16" type="Input">
 			<output>
 				<port id="0">
 					<dim>1</dim>
@@ -11,7 +11,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="1" name="Preprocessor/mul/fused_power" precision="FP32" type="Power">
+		<layer id="1" name="Preprocessor/mul/fused_power" precision="FP16" type="Power">
 			<data power="1" scale="0.007843137718737125" shift="-1.0"/>
 			<input>
 				<port id="0">
@@ -30,7 +30,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="2" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_1a_7x7/separable_conv2d/depthwise" precision="FP32" type="Convolution">
+		<layer id="2" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_1a_7x7/separable_conv2d/depthwise" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="3" kernel="7,7" output="24" pads_begin="2,2" pads_end="3,3" strides="2,2"/>
 			<input>
 				<port id="0">
@@ -49,10 +49,10 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="0" size="4704"/>
+				<weights offset="0" size="2352"/>
 			</blobs>
 		</layer>
-		<layer id="3" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_1a_7x7/separable_conv2d" precision="FP32" type="Convolution">
+		<layer id="3" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_1a_7x7/separable_conv2d" precision="FP16" type="Convolution">
 			<data auto_pad="valid" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -71,11 +71,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="4704" size="6144"/>
-				<biases offset="10848" size="256"/>
+				<weights offset="2352" size="3072"/>
+				<biases offset="5424" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="4" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_1a_7x7/Relu" precision="FP32" type="ReLU">
+		<layer id="4" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_1a_7x7/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -93,7 +93,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="5" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/MaxPool_2a_3x3/MaxPool" precision="FP32" type="Pooling">
+		<layer id="5" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/MaxPool_2a_3x3/MaxPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="0,0" pads_end="1,1" pool-method="max" strides="2,2"/>
 			<input>
 				<port id="0">
@@ -112,7 +112,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="6" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="6" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -131,11 +131,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="11104" size="16384"/>
-				<biases offset="27488" size="256"/>
+				<weights offset="5552" size="8192"/>
+				<biases offset="13744" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="7" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="7" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -153,7 +153,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="8" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="8" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -172,11 +172,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="27744" size="442368"/>
-				<biases offset="470112" size="768"/>
+				<weights offset="13872" size="221184"/>
+				<biases offset="235056" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="9" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="9" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Conv2d_2c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -194,7 +194,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="10" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/MaxPool_3a_3x3/MaxPool" precision="FP32" type="Pooling">
+		<layer id="10" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/MaxPool_3a_3x3/MaxPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="0,0" pads_end="1,1" pool-method="max" strides="2,2"/>
 			<input>
 				<port id="0">
@@ -213,7 +213,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="11" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="11" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -232,11 +232,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="470880" size="49152"/>
-				<biases offset="520032" size="256"/>
+				<weights offset="235440" size="24576"/>
+				<biases offset="260016" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="12" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="12" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -254,7 +254,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="13" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="13" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -273,11 +273,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="520288" size="49152"/>
-				<biases offset="569440" size="256"/>
+				<weights offset="260144" size="24576"/>
+				<biases offset="284720" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="14" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="14" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -295,7 +295,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="15" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="15" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="64" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -314,11 +314,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="569696" size="147456"/>
-				<biases offset="717152" size="256"/>
+				<weights offset="284848" size="73728"/>
+				<biases offset="358576" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="16" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="16" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -336,7 +336,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="17" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="17" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -355,11 +355,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="717408" size="49152"/>
-				<biases offset="766560" size="256"/>
+				<weights offset="358704" size="24576"/>
+				<biases offset="383280" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="18" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="18" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -377,7 +377,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="19" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="19" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -396,11 +396,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="766816" size="221184"/>
-				<biases offset="988000" size="384"/>
+				<weights offset="383408" size="110592"/>
+				<biases offset="494000" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="20" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="20" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -418,7 +418,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="21" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="21" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -437,11 +437,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="988384" size="331776"/>
-				<biases offset="1320160" size="384"/>
+				<weights offset="494192" size="165888"/>
+				<biases offset="660080" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="22" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="22" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -459,7 +459,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="23" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="23" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -478,7 +478,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="24" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="24" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="32" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -497,11 +497,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1320544" size="24576"/>
-				<biases offset="1345120" size="128"/>
+				<weights offset="660272" size="12288"/>
+				<biases offset="672560" size="64"/>
 			</blobs>
 		</layer>
-		<layer id="25" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="25" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -519,7 +519,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="26" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/concat" precision="FP32" type="Concat">
+		<layer id="26" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3b/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -556,7 +556,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="27" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="27" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -575,11 +575,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1345248" size="65536"/>
-				<biases offset="1410784" size="256"/>
+				<weights offset="672624" size="32768"/>
+				<biases offset="705392" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="28" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="28" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -597,7 +597,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="29" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="29" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -616,11 +616,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1411040" size="65536"/>
-				<biases offset="1476576" size="256"/>
+				<weights offset="705520" size="32768"/>
+				<biases offset="738288" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="30" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="30" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -638,7 +638,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="31" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="31" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -657,11 +657,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1476832" size="221184"/>
-				<biases offset="1698016" size="384"/>
+				<weights offset="738416" size="110592"/>
+				<biases offset="849008" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="32" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="32" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -679,7 +679,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="33" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="33" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -698,11 +698,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1698400" size="65536"/>
-				<biases offset="1763936" size="256"/>
+				<weights offset="849200" size="32768"/>
+				<biases offset="881968" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="34" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="34" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -720,7 +720,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="35" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="35" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -739,11 +739,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1764192" size="221184"/>
-				<biases offset="1985376" size="384"/>
+				<weights offset="882096" size="110592"/>
+				<biases offset="992688" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="36" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="36" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -761,7 +761,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="37" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="37" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -780,11 +780,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="1985760" size="331776"/>
-				<biases offset="2317536" size="384"/>
+				<weights offset="992880" size="165888"/>
+				<biases offset="1158768" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="38" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="38" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -802,7 +802,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="39" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="39" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -821,7 +821,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="40" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="40" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -840,11 +840,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="2317920" size="65536"/>
-				<biases offset="2383456" size="256"/>
+				<weights offset="1158960" size="32768"/>
+				<biases offset="1191728" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="41" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="41" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -862,7 +862,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="42" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/concat" precision="FP32" type="Concat">
+		<layer id="42" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_3c/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -899,7 +899,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="43" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="43" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -918,11 +918,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="2383712" size="163840"/>
-				<biases offset="2547552" size="512"/>
+				<weights offset="1191856" size="81920"/>
+				<biases offset="1273776" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="44" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="44" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -940,7 +940,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="45" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_1a_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="45" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_1a_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="160" pads_begin="1,1" pads_end="1,1" strides="2,2"/>
 			<input>
 				<port id="0">
@@ -959,11 +959,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="2548064" size="737280"/>
-				<biases offset="3285344" size="640"/>
+				<weights offset="1274032" size="368640"/>
+				<biases offset="1642672" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="46" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_1a_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="46" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_0/Conv2d_1a_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -981,7 +981,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="47" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="47" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1000,11 +1000,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="3285984" size="81920"/>
-				<biases offset="3367904" size="256"/>
+				<weights offset="1642992" size="40960"/>
+				<biases offset="1683952" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="48" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="48" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1022,7 +1022,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="49" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="49" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1041,11 +1041,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="3368160" size="221184"/>
-				<biases offset="3589344" size="384"/>
+				<weights offset="1684080" size="110592"/>
+				<biases offset="1794672" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="50" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="50" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1063,7 +1063,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="51" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_1a_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="51" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_1a_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="2,2"/>
 			<input>
 				<port id="0">
@@ -1082,11 +1082,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="3589728" size="331776"/>
-				<biases offset="3921504" size="384"/>
+				<weights offset="1794864" size="165888"/>
+				<biases offset="1960752" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="52" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_1a_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="52" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_1/Conv2d_1a_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1104,7 +1104,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="53" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_2/MaxPool_1a_3x3/MaxPool" precision="FP32" type="Pooling">
+		<layer id="53" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/Branch_2/MaxPool_1a_3x3/MaxPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="2,2"/>
 			<input>
 				<port id="0">
@@ -1123,7 +1123,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="54" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/concat" precision="FP32" type="Concat">
+		<layer id="54" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4a/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -1154,7 +1154,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="55" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="55" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="224" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1173,11 +1173,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="3921888" size="516096"/>
-				<biases offset="4437984" size="896"/>
+				<weights offset="1960944" size="258048"/>
+				<biases offset="2218992" size="448"/>
 			</blobs>
 		</layer>
-		<layer id="56" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="56" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1195,7 +1195,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="57" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="57" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1214,11 +1214,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="4438880" size="147456"/>
-				<biases offset="4586336" size="256"/>
+				<weights offset="2219440" size="73728"/>
+				<biases offset="2293168" size="128"/>
 			</blobs>
 		</layer>
-		<layer id="58" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="58" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1236,7 +1236,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="59" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="59" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="96" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1255,11 +1255,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="4586592" size="221184"/>
-				<biases offset="4807776" size="384"/>
+				<weights offset="2293296" size="110592"/>
+				<biases offset="2403888" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="60" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="60" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1277,7 +1277,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="61" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="61" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1296,11 +1296,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="4808160" size="221184"/>
-				<biases offset="5029344" size="384"/>
+				<weights offset="2404080" size="110592"/>
+				<biases offset="2514672" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="62" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="62" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1318,7 +1318,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="63" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="63" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1337,11 +1337,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="5029728" size="442368"/>
-				<biases offset="5472096" size="512"/>
+				<weights offset="2514864" size="221184"/>
+				<biases offset="2736048" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="64" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="64" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1359,7 +1359,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="65" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="65" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1378,11 +1378,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="5472608" size="589824"/>
-				<biases offset="6062432" size="512"/>
+				<weights offset="2736304" size="294912"/>
+				<biases offset="3031216" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="66" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="66" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1400,7 +1400,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="67" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="67" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1419,7 +1419,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="68" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="68" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1438,11 +1438,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="6062944" size="294912"/>
-				<biases offset="6357856" size="512"/>
+				<weights offset="3031472" size="147456"/>
+				<biases offset="3178928" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="69" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="69" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1460,7 +1460,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="70" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/concat" precision="FP32" type="Concat">
+		<layer id="70" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4b/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -1497,7 +1497,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="71" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="71" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1516,11 +1516,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="6358368" size="442368"/>
-				<biases offset="6800736" size="768"/>
+				<weights offset="3179184" size="221184"/>
+				<biases offset="3400368" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="72" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="72" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1538,7 +1538,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="73" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="73" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1557,11 +1557,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="6801504" size="221184"/>
-				<biases offset="7022688" size="384"/>
+				<weights offset="3400752" size="110592"/>
+				<biases offset="3511344" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="74" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="74" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1579,7 +1579,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="75" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="75" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1598,11 +1598,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="7023072" size="442368"/>
-				<biases offset="7465440" size="512"/>
+				<weights offset="3511536" size="221184"/>
+				<biases offset="3732720" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="76" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="76" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1620,7 +1620,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="77" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="77" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1639,11 +1639,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="7465952" size="221184"/>
-				<biases offset="7687136" size="384"/>
+				<weights offset="3732976" size="110592"/>
+				<biases offset="3843568" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="78" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="78" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1661,7 +1661,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="79" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="79" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1680,11 +1680,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="7687520" size="442368"/>
-				<biases offset="8129888" size="512"/>
+				<weights offset="3843760" size="221184"/>
+				<biases offset="4064944" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="80" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="80" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1702,7 +1702,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="81" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="81" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1721,11 +1721,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="8130400" size="589824"/>
-				<biases offset="8720224" size="512"/>
+				<weights offset="4065200" size="294912"/>
+				<biases offset="4360112" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="82" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="82" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1743,7 +1743,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="83" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="83" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1762,7 +1762,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="84" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="84" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1781,11 +1781,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="8720736" size="294912"/>
-				<biases offset="9015648" size="512"/>
+				<weights offset="4360368" size="147456"/>
+				<biases offset="4507824" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="85" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="85" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1803,7 +1803,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="86" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/concat" precision="FP32" type="Concat">
+		<layer id="86" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4c/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -1840,7 +1840,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="87" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="87" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="160" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1859,11 +1859,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="9016160" size="368640"/>
-				<biases offset="9384800" size="640"/>
+				<weights offset="4508080" size="184320"/>
+				<biases offset="4692400" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="88" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="88" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1881,7 +1881,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="89" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="89" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1900,11 +1900,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="9385440" size="294912"/>
-				<biases offset="9680352" size="512"/>
+				<weights offset="4692720" size="147456"/>
+				<biases offset="4840176" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="90" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="90" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1922,7 +1922,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="91" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="91" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="160" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1941,11 +1941,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="9680864" size="737280"/>
-				<biases offset="10418144" size="640"/>
+				<weights offset="4840432" size="368640"/>
+				<biases offset="5209072" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="92" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="92" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1963,7 +1963,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="93" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="93" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -1982,11 +1982,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="10418784" size="294912"/>
-				<biases offset="10713696" size="512"/>
+				<weights offset="5209392" size="147456"/>
+				<biases offset="5356848" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="94" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="94" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2004,7 +2004,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="95" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="95" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="160" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2023,11 +2023,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="10714208" size="737280"/>
-				<biases offset="11451488" size="640"/>
+				<weights offset="5357104" size="368640"/>
+				<biases offset="5725744" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="96" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="96" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2045,7 +2045,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="97" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="97" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="160" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2064,11 +2064,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="11452128" size="921600"/>
-				<biases offset="12373728" size="640"/>
+				<weights offset="5726064" size="460800"/>
+				<biases offset="6186864" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="98" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="98" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2086,7 +2086,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="99" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="99" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2105,7 +2105,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="100" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="100" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2124,11 +2124,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="12374368" size="221184"/>
-				<biases offset="12595552" size="384"/>
+				<weights offset="6187184" size="110592"/>
+				<biases offset="6297776" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="101" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="101" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2146,7 +2146,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="102" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/concat" precision="FP32" type="Concat">
+		<layer id="102" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4d/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -2183,7 +2183,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="103" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="103" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2202,11 +2202,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="12595936" size="221184"/>
-				<biases offset="12817120" size="384"/>
+				<weights offset="6297968" size="110592"/>
+				<biases offset="6408560" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="104" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="104" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2224,7 +2224,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="105" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="105" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2243,11 +2243,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="12817504" size="294912"/>
-				<biases offset="13112416" size="512"/>
+				<weights offset="6408752" size="147456"/>
+				<biases offset="6556208" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="106" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="106" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2265,7 +2265,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="107" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="107" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2284,11 +2284,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="13112928" size="884736"/>
-				<biases offset="13997664" size="768"/>
+				<weights offset="6556464" size="442368"/>
+				<biases offset="6998832" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="108" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="108" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2306,7 +2306,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="109" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="109" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="160" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2325,11 +2325,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="13998432" size="368640"/>
-				<biases offset="14367072" size="640"/>
+				<weights offset="6999216" size="184320"/>
+				<biases offset="7183536" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="110" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="110" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2347,7 +2347,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="111" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="111" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2366,11 +2366,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="14367712" size="1105920"/>
-				<biases offset="15473632" size="768"/>
+				<weights offset="7183856" size="552960"/>
+				<biases offset="7736816" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="112" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="112" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2388,7 +2388,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="113" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="113" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2407,11 +2407,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="15474400" size="1327104"/>
-				<biases offset="16801504" size="768"/>
+				<weights offset="7737200" size="663552"/>
+				<biases offset="8400752" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="114" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="114" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2429,7 +2429,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="115" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="115" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2448,7 +2448,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="116" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="116" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="96" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2467,11 +2467,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="16802272" size="221184"/>
-				<biases offset="17023456" size="384"/>
+				<weights offset="8401136" size="110592"/>
+				<biases offset="8511728" size="192"/>
 			</blobs>
 		</layer>
-		<layer id="117" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="117" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2489,7 +2489,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="118" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/concat" precision="FP32" type="Concat">
+		<layer id="118" name="FirstStageFeatureExtractor/InceptionV2/InceptionV2/Mixed_4e/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
@@ -2526,7 +2526,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="119" name="Conv/Conv2D" precision="FP32" type="Convolution">
+		<layer id="119" name="Conv/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="512" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2545,11 +2545,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="17023840" size="10616832"/>
-				<biases offset="27640672" size="2048"/>
+				<weights offset="8511920" size="5308416"/>
+				<biases offset="13820336" size="1024"/>
 			</blobs>
 		</layer>
-		<layer id="120" name="Conv/Relu6" precision="FP32" type="Clamp">
+		<layer id="120" name="Conv/Relu6" precision="FP16" type="Clamp">
 			<data max="6" min="0"/>
 			<input>
 				<port id="0">
@@ -2568,7 +2568,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="121" name="FirstStageBoxPredictor/ClassPredictor/Conv2D" precision="FP32" type="Convolution">
+		<layer id="121" name="FirstStageBoxPredictor/ClassPredictor/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2587,8 +2587,8 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="27642720" size="49152"/>
-				<biases offset="27691872" size="96"/>
+				<weights offset="13821360" size="24576"/>
+				<biases offset="13845936" size="48"/>
 			</blobs>
 		</layer>
 		<layer id="122" name="predictions/Reshape/value/Output_0/Data__const" precision="I32" type="Const">
@@ -2598,10 +2598,10 @@
 				</port>
 			</output>
 			<blobs>
-				<custom offset="27691968" size="16"/>
+				<custom offset="13845984" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="123" name="predictions/Reshape" precision="FP32" type="Reshape">
+		<layer id="123" name="predictions/Reshape" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2622,7 +2622,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="124" name="predictions/Reshape/Softmax" precision="FP32" type="SoftMax">
+		<layer id="124" name="predictions/Reshape/Softmax" precision="FP16" type="SoftMax">
 			<data axis="2"/>
 			<input>
 				<port id="0">
@@ -2641,7 +2641,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="125" name="predictions/Reshape/Softmax/Transpose" precision="FP32" type="Permute">
+		<layer id="125" name="predictions/Reshape/Softmax/Transpose" precision="FP16" type="Permute">
 			<data order="0,2,1,3"/>
 			<input>
 				<port id="0">
@@ -2660,17 +2660,17 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="126" name="17824_const" precision="I32" type="Const">
+		<layer id="126" name="20502_const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="27691984" size="16"/>
+				<custom offset="13846000" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="127" name="Reshape_Transpose_Class" precision="FP32" type="Reshape">
+		<layer id="127" name="Reshape_Transpose_Class" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2691,7 +2691,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="128" name="FirstStageBoxPredictor/BoxEncodingPredictor/Conv2D" precision="FP32" type="Convolution">
+		<layer id="128" name="FirstStageBoxPredictor/BoxEncodingPredictor/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="48" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
@@ -2710,11 +2710,11 @@
 				</port>
 			</output>
 			<blobs>
-				<weights offset="27692000" size="98304"/>
-				<biases offset="27790304" size="192"/>
+				<weights offset="13846016" size="49152"/>
+				<biases offset="13895168" size="96"/>
 			</blobs>
 		</layer>
-		<layer id="129" name="image_info" precision="FP32" type="Input">
+		<layer id="129" name="image_info" precision="FP16" type="Input">
 			<output>
 				<port id="0">
 					<dim>1</dim>
@@ -2722,8 +2722,8 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="130" name="proposals" precision="FP32" type="Proposal">
-			<data base_size="256" box_coordinate_scale="10.0" box_size_scale="5.0" clip_after_nms="1" clip_before_nms="0" feat_stride="16" for_deformable="0" framework="tensorflow" min_size="1" nms_thresh="0.69999999" normalize="1" post_nms_topn="300" pre_nms_topn="2147483647" ratio="0.5,1.0,2.0" scale="0.25,0.5,1.0,2.0"/>
+		<layer id="130" name="proposals" precision="FP16" type="Proposal">
+			<data base_size="256" box_coordinate_scale="10.0" box_size_scale="5.0" clip_after_nms="0" clip_before_nms="1" feat_stride="16" for_deformable="0" framework="tensorflow" min_size="1" nms_thresh="0.699999988079" normalize="1" post_nms_topn="100" pre_nms_topn="2147483647" ratio="0.5,1.0,2.0" scale="0.25,0.5,1.0,2.0"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2744,25 +2744,25 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="131" name="17828_const" precision="I32" type="Const">
+		<layer id="131" name="20498_const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="27790496" size="16"/>
+				<custom offset="13895264" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="132" name="proposals/reshape_4d" precision="FP32" type="Reshape">
+		<layer id="132" name="proposals/reshape_4d" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 				</port>
 				<port id="1">
@@ -2771,18 +2771,18 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="133" name="proposals/conv" precision="FP32" type="Convolution">
+		<layer id="133" name="proposals/conv" precision="FP16" type="Convolution">
 			<data dilations="1,1" group="1" kernel="1,1" output="5" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 					<dim>1</dim>
 					<dim>1</dim>
@@ -2790,14 +2790,14 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="27790512" size="100"/>
+				<weights offset="13895280" size="50"/>
 			</blobs>
 		</layer>
 		<layer id="134" name="reshape_swap_proposals_2d/value/Output_0/Data__const" precision="I32" type="Const">
@@ -2807,13 +2807,13 @@
 				</port>
 			</output>
 			<blobs>
-				<custom offset="27790612" size="8"/>
+				<custom offset="13895330" size="8"/>
 			</blobs>
 		</layer>
-		<layer id="135" name="reshape_swap_proposals_2d" precision="FP32" type="Reshape">
+		<layer id="135" name="reshape_swap_proposals_2d" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 					<dim>1</dim>
 					<dim>1</dim>
@@ -2824,12 +2824,12 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="136" name="CropAndResize/CropAndResize" precision="FP32" type="ROIPooling">
+		<layer id="136" name="CropAndResize" precision="FP16" type="ROIPooling">
 			<data method="bilinear" pooled_h="14" pooled_w="14" spatial_scale="1"/>
 			<input>
 				<port id="0">
@@ -2839,24 +2839,24 @@
 					<dim>38</dim>
 				</port>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 				</port>
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>14</dim>
 					<dim>14</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="137" name="MaxPool2D/MaxPool" precision="FP32" type="Pooling">
+		<layer id="137" name="MaxPool2D/MaxPool" precision="FP16" type="Pooling">
 			<data auto_pad="valid" exclude-pad="true" kernel="2,2" pads_begin="0,0" pads_end="0,0" pool-method="max" strides="2,2"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>14</dim>
 					<dim>14</dim>
@@ -2864,18 +2864,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="138" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="138" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -2883,21 +2883,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="27790620" size="294912"/>
-				<biases offset="28085532" size="512"/>
+				<weights offset="13895338" size="147456"/>
+				<biases offset="14042794" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="139" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="139" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -2905,18 +2905,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="140" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_1a_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="140" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_1a_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="192" pads_begin="1,1" pads_end="1,1" strides="2,2"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -2924,21 +2924,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="28086044" size="884736"/>
-				<biases offset="28970780" size="768"/>
+				<weights offset="14043050" size="442368"/>
+				<biases offset="14485418" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="141" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_1a_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="141" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_0/Conv2d_1a_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -2946,18 +2946,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="142" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="142" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -2965,21 +2965,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="28971548" size="442368"/>
-				<biases offset="29413916" size="768"/>
+				<weights offset="14485802" size="221184"/>
+				<biases offset="14706986" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="143" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="143" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -2987,18 +2987,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="144" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="144" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="256" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -3006,21 +3006,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="29414684" size="1769472"/>
-				<biases offset="31184156" size="1024"/>
+				<weights offset="14707370" size="884736"/>
+				<biases offset="15592106" size="512"/>
 			</blobs>
 		</layer>
-		<layer id="145" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="145" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -3028,18 +3028,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>7</dim>
 					<dim>7</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="146" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_1a_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="146" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_1a_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="256" pads_begin="1,1" pads_end="1,1" strides="2,2"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -3047,21 +3047,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="31185180" size="2359296"/>
-				<biases offset="33544476" size="1024"/>
+				<weights offset="15592618" size="1179648"/>
+				<biases offset="16772266" size="512"/>
 			</blobs>
 		</layer>
-		<layer id="147" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_1a_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="147" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_1/Conv2d_1a_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3069,18 +3069,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="148" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_2/MaxPool_1a_3x3/MaxPool" precision="FP32" type="Pooling">
+		<layer id="148" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/Branch_2/MaxPool_1a_3x3/MaxPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="2,2"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -3088,30 +3088,30 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="149" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/concat" precision="FP32" type="Concat">
+		<layer id="149" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5a/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>256</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>576</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3119,18 +3119,18 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="150" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="150" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="352" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3138,21 +3138,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="33545500" size="1441792"/>
-				<biases offset="34987292" size="1408"/>
+				<weights offset="16772778" size="720896"/>
+				<biases offset="17493674" size="704"/>
 			</blobs>
 		</layer>
-		<layer id="151" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="151" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3160,18 +3160,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="152" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="152" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3179,21 +3179,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="34988700" size="786432"/>
-				<biases offset="35775132" size="768"/>
+				<weights offset="17494378" size="393216"/>
+				<biases offset="17887594" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="153" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="153" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3201,18 +3201,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="154" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="154" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="320" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3220,21 +3220,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="35775900" size="2211840"/>
-				<biases offset="37987740" size="1280"/>
+				<weights offset="17887978" size="1105920"/>
+				<biases offset="18993898" size="640"/>
 			</blobs>
 		</layer>
-		<layer id="155" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="155" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3242,18 +3242,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="156" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="156" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="160" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3261,21 +3261,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>160</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="37989020" size="655360"/>
-				<biases offset="38644380" size="640"/>
+				<weights offset="18994538" size="327680"/>
+				<biases offset="19322218" size="320"/>
 			</blobs>
 		</layer>
-		<layer id="157" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="157" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>160</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3283,18 +3283,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>160</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="158" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="158" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="224" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>160</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3302,21 +3302,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="38645020" size="1290240"/>
-				<biases offset="39935260" size="896"/>
+				<weights offset="19322538" size="645120"/>
+				<biases offset="19967658" size="448"/>
 			</blobs>
 		</layer>
-		<layer id="159" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="159" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3324,18 +3324,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="160" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="160" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="224" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3343,21 +3343,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="39936156" size="1806336"/>
-				<biases offset="41742492" size="896"/>
+				<weights offset="19968106" size="903168"/>
+				<biases offset="20871274" size="448"/>
 			</blobs>
 		</layer>
-		<layer id="161" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="161" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3365,18 +3365,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="162" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP32" type="Pooling">
+		<layer id="162" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3384,18 +3384,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="163" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="163" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3403,21 +3403,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="41743388" size="524288"/>
-				<biases offset="42267676" size="512"/>
+				<weights offset="20871722" size="262144"/>
+				<biases offset="21133866" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="164" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="164" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3425,36 +3425,36 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="165" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/concat" precision="FP32" type="Concat">
+		<layer id="165" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5b/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3462,18 +3462,18 @@
 			</input>
 			<output>
 				<port id="4">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="166" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="166" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="352" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3481,21 +3481,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="42268188" size="1441792"/>
-				<biases offset="43709980" size="1408"/>
+				<weights offset="21134122" size="720896"/>
+				<biases offset="21855018" size="704"/>
 			</blobs>
 		</layer>
-		<layer id="167" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="167" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_0/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3503,18 +3503,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="168" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="168" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3522,21 +3522,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="43711388" size="786432"/>
-				<biases offset="44497820" size="768"/>
+				<weights offset="21855722" size="393216"/>
+				<biases offset="22248938" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="169" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="169" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3544,18 +3544,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="170" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="170" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="320" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3563,21 +3563,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="44498588" size="2211840"/>
-				<biases offset="46710428" size="1280"/>
+				<weights offset="22249322" size="1105920"/>
+				<biases offset="23355242" size="640"/>
 			</blobs>
 		</layer>
-		<layer id="171" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="171" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_1/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3585,18 +3585,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="172" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="172" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="192" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3604,21 +3604,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="46711708" size="786432"/>
-				<biases offset="47498140" size="768"/>
+				<weights offset="23355882" size="393216"/>
+				<biases offset="23749098" size="384"/>
 			</blobs>
 		</layer>
-		<layer id="173" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="173" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0a_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3626,18 +3626,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="174" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="174" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="224" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>192</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3645,21 +3645,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="47498908" size="1548288"/>
-				<biases offset="49047196" size="896"/>
+				<weights offset="23749482" size="774144"/>
+				<biases offset="24523626" size="448"/>
 			</blobs>
 		</layer>
-		<layer id="175" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="175" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0b_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3667,18 +3667,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="176" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP32" type="Convolution">
+		<layer id="176" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" output="224" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3686,21 +3686,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="49048092" size="1806336"/>
-				<biases offset="50854428" size="896"/>
+				<weights offset="24524074" size="903168"/>
+				<biases offset="25427242" size="448"/>
 			</blobs>
 		</layer>
-		<layer id="177" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0c_3x3/Relu" precision="FP32" type="ReLU">
+		<layer id="177" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_2/Conv2d_0c_3x3/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3708,18 +3708,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="178" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP32" type="Pooling">
+		<layer id="178" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_3/MaxPool_0a_3x3/MaxPool" precision="FP16" type="Pooling">
 			<data auto_pad="same_upper" exclude-pad="true" kernel="3,3" pads_begin="1,1" pads_end="1,1" pool-method="max" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3727,18 +3727,18 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="179" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP32" type="Convolution">
+		<layer id="179" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D" precision="FP16" type="Convolution">
 			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3746,21 +3746,21 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="50855324" size="524288"/>
-				<biases offset="51379612" size="512"/>
+				<weights offset="25427690" size="262144"/>
+				<biases offset="25689834" size="256"/>
 			</blobs>
 		</layer>
-		<layer id="180" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP32" type="ReLU">
+		<layer id="180" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/Branch_3/Conv2d_0b_1x1/Relu" precision="FP16" type="ReLU">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3768,36 +3768,36 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="181" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/concat" precision="FP32" type="Concat">
+		<layer id="181" name="SecondStageFeatureExtractor/InceptionV2/Mixed_5c/concat" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>352</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>320</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>224</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 				<port id="3">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>128</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3805,27 +3805,27 @@
 			</input>
 			<output>
 				<port id="4">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="182" name="18695_const" precision="I32" type="Const">
+		<layer id="182" name="21354_const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51380124" size="16"/>
+				<custom offset="25690090" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="183" name="SecondStageBoxPredictor/AvgPool/Reshape" precision="FP32" type="Reshape">
+		<layer id="183" name="SecondStageBoxPredictor/AvgPool/Reshape" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>4</dim>
 					<dim>4</dim>
@@ -3836,18 +3836,18 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>16</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="184" name="SecondStageBoxPredictor/AvgPool/Pool" precision="FP32" type="Pooling">
+		<layer id="184" name="SecondStageBoxPredictor/AvgPool/Pool" precision="FP16" type="Pooling">
 			<data exclude-pad="false" kernel="16,1" pads_begin="0,0" pads_end="0,0" pool-method="avg" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>16</dim>
 					<dim>1</dim>
@@ -3855,27 +3855,27 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="185" name="18697_const" precision="I32" type="Const">
+		<layer id="185" name="21356_const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51380140" size="16"/>
+				<custom offset="25690106" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="186" name="SecondStageBoxPredictor/AvgPool/FinalReshape" precision="FP32" type="Reshape">
+		<layer id="186" name="SecondStageBoxPredictor/AvgPool/FinalReshape" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>1</dim>
 					<dim>1</dim>
@@ -3886,18 +3886,18 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="187" name="SecondStageBoxPredictor/AvgPool/Transpose" precision="FP32" type="Permute">
+		<layer id="187" name="SecondStageBoxPredictor/AvgPool/Transpose" precision="FP16" type="Permute">
 			<data order="0,2,3,1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 					<dim>1</dim>
 					<dim>1</dim>
@@ -3905,27 +3905,27 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 					<dim>1024</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="188" name="3394/Output_0/Data__const" precision="I32" type="Const">
+		<layer id="188" name="11129/Output_0/Data__const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>2</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51380156" size="8"/>
+				<custom offset="25690122" size="8"/>
 			</blobs>
 		</layer>
-		<layer id="189" name="SecondStageBoxPredictor/Flatten/flatten/Reshape" precision="FP32" type="Reshape">
+		<layer id="189" name="SecondStageBoxPredictor/Flatten/flatten/Reshape" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 					<dim>1024</dim>
@@ -3936,28 +3936,28 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="190" name="SecondStageBoxPredictor/BoxEncodingPredictor/MatMul" precision="FP32" type="FullyConnected">
-			<data out-size="24"/>
+		<layer id="190" name="SecondStageBoxPredictor/BoxEncodingPredictor/MatMul" precision="FP16" type="FullyConnected">
+			<data out-size="360"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
-					<dim>24</dim>
+					<dim>100</dim>
+					<dim>360</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="51380164" size="98304"/>
-				<biases offset="51478468" size="96"/>
+				<weights offset="25690130" size="737280"/>
+				<biases offset="26427410" size="720"/>
 			</blobs>
 		</layer>
 		<layer id="191" name="reshape_loc/value/Output_0/Data__const" precision="I32" type="Const">
@@ -3967,14 +3967,14 @@
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51478564" size="16"/>
+				<custom offset="26428130" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="192" name="reshape_loc" precision="FP32" type="Reshape">
+		<layer id="192" name="reshape_loc" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>24</dim>
+					<dim>100</dim>
+					<dim>360</dim>
 				</port>
 				<port id="1">
 					<dim>4</dim>
@@ -3982,52 +3982,52 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
-					<dim>6</dim>
+					<dim>100</dim>
+					<dim>90</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="193" name="crop_locs" precision="FP32" type="Crop">
+		<layer id="193" name="crop_locs" precision="FP16" type="Crop">
 			<data axis="1" dim="1" offset="0"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>6</dim>
+					<dim>100</dim>
+					<dim>90</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="194" name="reshape_loc/locs_with_fake_background" precision="FP32" type="Concat">
+		<layer id="194" name="reshape_loc/locs_with_fake_background" precision="FP16" type="Concat">
 			<data axis="1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
 				<port id="1">
-					<dim>300</dim>
-					<dim>6</dim>
+					<dim>100</dim>
+					<dim>90</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
@@ -4040,14 +4040,14 @@
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51478580" size="8"/>
+				<custom offset="26428146" size="8"/>
 			</blobs>
 		</layer>
-		<layer id="196" name="reshape_locs_2d" precision="FP32" type="Reshape">
+		<layer id="196" name="reshape_locs_2d" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 					<dim>1</dim>
 					<dim>4</dim>
 				</port>
@@ -4057,27 +4057,27 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>2100</dim>
+					<dim>9100</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="197" name="ScaleShift/scale_locs" precision="FP32" type="ScaleShift">
+		<layer id="197" name="ScaleShift/scale_locs" precision="FP16" type="ScaleShift">
 			<input>
 				<port id="0">
-					<dim>2100</dim>
+					<dim>9100</dim>
 					<dim>4</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>2100</dim>
+					<dim>9100</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="51478588" size="16"/>
-				<biases offset="51478604" size="16"/>
+				<weights offset="26428154" size="8"/>
+				<biases offset="26428162" size="8"/>
 			</blobs>
 		</layer>
 		<layer id="198" name="do_reshape_locs/Dim/Output_0/Data__const" precision="I32" type="Const">
@@ -4087,13 +4087,13 @@
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51478620" size="8"/>
+				<custom offset="26428170" size="8"/>
 			</blobs>
 		</layer>
-		<layer id="199" name="do_reshape_locs" precision="FP32" type="Reshape">
+		<layer id="199" name="do_reshape_locs" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>2100</dim>
+					<dim>9100</dim>
 					<dim>4</dim>
 				</port>
 				<port id="1">
@@ -4103,173 +4103,44 @@
 			<output>
 				<port id="2">
 					<dim>1</dim>
-					<dim>8400</dim>
+					<dim>36400</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="200" name="18704_const" precision="I32" type="Const">
-			<output>
-				<port id="1">
-					<dim>4</dim>
-				</port>
-			</output>
-			<blobs>
-				<custom offset="51380124" size="16"/>
-			</blobs>
-		</layer>
-		<layer id="201" name="SecondStageBoxPredictor/AvgPool_1/Reshape" precision="FP32" type="Reshape">
+		<layer id="200" name="SecondStageBoxPredictor/ClassPredictor/MatMul" precision="FP16" type="FullyConnected">
+			<data out-size="91"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>4</dim>
-					<dim>4</dim>
-				</port>
-				<port id="1">
-					<dim>4</dim>
-				</port>
-			</input>
-			<output>
-				<port id="2">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>16</dim>
-					<dim>1</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="202" name="SecondStageBoxPredictor/AvgPool_1/Pool" precision="FP32" type="Pooling">
-			<data exclude-pad="false" kernel="16,1" pads_begin="0,0" pads_end="0,0" pool-method="avg" strides="1,1"/>
-			<input>
-				<port id="0">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>16</dim>
-					<dim>1</dim>
-				</port>
-			</input>
-			<output>
-				<port id="1">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>1</dim>
-					<dim>1</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="203" name="18706_const" precision="I32" type="Const">
-			<output>
-				<port id="1">
-					<dim>4</dim>
-				</port>
-			</output>
-			<blobs>
-				<custom offset="51380140" size="16"/>
-			</blobs>
-		</layer>
-		<layer id="204" name="SecondStageBoxPredictor/AvgPool_1/FinalReshape" precision="FP32" type="Reshape">
-			<input>
-				<port id="0">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>1</dim>
-					<dim>1</dim>
-				</port>
-				<port id="1">
-					<dim>4</dim>
-				</port>
-			</input>
-			<output>
-				<port id="2">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>1</dim>
-					<dim>1</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="205" name="SecondStageBoxPredictor/AvgPool_1/Transpose" precision="FP32" type="Permute">
-			<data order="0,2,3,1"/>
-			<input>
-				<port id="0">
-					<dim>300</dim>
-					<dim>1024</dim>
-					<dim>1</dim>
-					<dim>1</dim>
-				</port>
-			</input>
-			<output>
-				<port id="1">
-					<dim>300</dim>
-					<dim>1</dim>
-					<dim>1</dim>
-					<dim>1024</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="206" name="3393/Output_0/Data__const" precision="I32" type="Const">
-			<output>
-				<port id="1">
-					<dim>2</dim>
-				</port>
-			</output>
-			<blobs>
-				<custom offset="51380156" size="8"/>
-			</blobs>
-		</layer>
-		<layer id="207" name="SecondStageBoxPredictor/Flatten_1/flatten/Reshape" precision="FP32" type="Reshape">
-			<input>
-				<port id="0">
-					<dim>300</dim>
-					<dim>1</dim>
-					<dim>1</dim>
-					<dim>1024</dim>
-				</port>
-				<port id="1">
-					<dim>2</dim>
-				</port>
-			</input>
-			<output>
-				<port id="2">
-					<dim>300</dim>
-					<dim>1024</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="208" name="SecondStageBoxPredictor/ClassPredictor/MatMul" precision="FP32" type="FullyConnected">
-			<data out-size="7"/>
-			<input>
-				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1024</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 				</port>
 			</output>
 			<blobs>
-				<weights offset="51478628" size="28672"/>
-				<biases offset="51507300" size="28"/>
+				<weights offset="26428178" size="186368"/>
+				<biases offset="26614546" size="182"/>
 			</blobs>
 		</layer>
-		<layer id="209" name="SecondStageBoxPredictor/Reshape_1/shape/Output_0/Data__const" precision="I32" type="Const">
+		<layer id="201" name="SecondStageBoxPredictor/Reshape_1/shape/Output_0/Data__const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>3</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51507328" size="12"/>
+				<custom offset="26614728" size="12"/>
 			</blobs>
 		</layer>
-		<layer id="210" name="SecondStageBoxPredictor/Reshape_1" precision="FP32" type="Reshape">
+		<layer id="202" name="SecondStageBoxPredictor/Reshape_1" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 				</port>
 				<port id="1">
 					<dim>3</dim>
@@ -4277,28 +4148,28 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1</dim>
-					<dim>7</dim>
+					<dim>91</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="211" name="all_class_predictions_with_background/Dims/Output_0/Data__const" precision="I32" type="Const">
+		<layer id="203" name="Squeeze_3/Dims/Output_0/Data__const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>1</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51507340" size="4"/>
+				<custom offset="26614740" size="4"/>
 			</blobs>
 		</layer>
-		<layer id="212" name="all_class_predictions_with_background" precision="FP32" type="Squeeze">
+		<layer id="204" name="Squeeze_3" precision="FP16" type="Squeeze">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>1</dim>
-					<dim>7</dim>
+					<dim>91</dim>
 				</port>
 				<port id="1">
 					<dim>1</dim>
@@ -4306,41 +4177,41 @@
 			</input>
 			<output>
 				<port id="2">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="213" name="all_class_predictions_with_background/softmax" precision="FP32" type="SoftMax">
+		<layer id="205" name="Squeeze_3/softmax" precision="FP16" type="SoftMax">
 			<data axis="1"/>
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="214" name="do_reshape_conf/value/Output_0/Data__const" precision="I32" type="Const">
+		<layer id="206" name="do_reshape_conf/value/Output_0/Data__const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>2</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51507344" size="8"/>
+				<custom offset="26614744" size="8"/>
 			</blobs>
 		</layer>
-		<layer id="215" name="do_reshape_conf" precision="FP32" type="Reshape">
+		<layer id="207" name="do_reshape_conf" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
-					<dim>7</dim>
+					<dim>100</dim>
+					<dim>91</dim>
 				</port>
 				<port id="1">
 					<dim>2</dim>
@@ -4349,24 +4220,24 @@
 			<output>
 				<port id="2">
 					<dim>1</dim>
-					<dim>2100</dim>
+					<dim>9100</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="216" name="reshape_proposal_4d/value/Output_0/Data__const" precision="I32" type="Const">
+		<layer id="208" name="reshape_proposal_4d/value/Output_0/Data__const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>4</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51507352" size="16"/>
+				<custom offset="26614752" size="16"/>
 			</blobs>
 		</layer>
-		<layer id="217" name="reshape_proposal_4d" precision="FP32" type="Reshape">
+		<layer id="209" name="reshape_proposal_4d" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 					<dim>1</dim>
 					<dim>1</dim>
@@ -4379,18 +4250,18 @@
 				<port id="2">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="218" name="crop_proposals" precision="FP32" type="Crop">
+		<layer id="210" name="crop_proposals" precision="FP16" type="Crop">
 			<data axis="3" dim="4" offset="1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>5</dim>
 				</port>
 			</input>
@@ -4398,27 +4269,27 @@
 				<port id="1">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>4</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="219" name="DetectionOutput_reshape_priors_/value/Output_0/Data__const" precision="I32" type="Const">
+		<layer id="211" name="DetectionOutput_reshape_priors_/value/Output_0/Data__const" precision="I32" type="Const">
 			<output>
 				<port id="1">
 					<dim>3</dim>
 				</port>
 			</output>
 			<blobs>
-				<custom offset="51507368" size="12"/>
+				<custom offset="26614768" size="12"/>
 			</blobs>
 		</layer>
-		<layer id="220" name="DetectionOutput_reshape_priors_" precision="FP32" type="Reshape">
+		<layer id="212" name="DetectionOutput_reshape_priors_" precision="FP16" type="Reshape">
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>4</dim>
 				</port>
 				<port id="1">
@@ -4429,32 +4300,32 @@
 				<port id="2">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>1200</dim>
+					<dim>400</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="221" name="detection_output" precision="FP32" type="DetectionOutput">
-			<data clip_after_nms="1" clip_before_nms="0" code_type="caffe.PriorBoxParameter.CENTER_SIZE" confidence_threshold="0.0" input_height="1" input_width="1" keep_top_k="300" nms_threshold="0.60000002" normalized="1" num_classes="7" pad_mode="caffe.ResizeParameter.CONSTANT" resize_mode="caffe.ResizeParameter.WARP" share_location="0" top_k="100" variance_encoded_in_target="1"/>
+		<layer id="213" name="detection_output" precision="FP16" type="DetectionOutput">
+			<data clip_after_nms="0" clip_before_nms="1" code_type="caffe.PriorBoxParameter.CENTER_SIZE" confidence_threshold="0.300000011921" input_height="1" input_width="1" keep_top_k="100" nms_threshold="0.600000023842" normalized="1" num_classes="91" pad_mode="caffe.ResizeParameter.CONSTANT" resize_mode="caffe.ResizeParameter.WARP" share_location="0" top_k="100" variance_encoded_in_target="1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
-					<dim>8400</dim>
+					<dim>36400</dim>
 				</port>
 				<port id="1">
 					<dim>1</dim>
-					<dim>2100</dim>
+					<dim>9100</dim>
 				</port>
 				<port id="2">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>1200</dim>
+					<dim>400</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>300</dim>
+					<dim>100</dim>
 					<dim>7</dim>
 				</port>
 			</output>
@@ -4691,37 +4562,28 @@
 		<edge from-layer="196" from-port="2" to-layer="197" to-port="0"/>
 		<edge from-layer="197" from-port="3" to-layer="199" to-port="0"/>
 		<edge from-layer="198" from-port="1" to-layer="199" to-port="1"/>
-		<edge from-layer="181" from-port="4" to-layer="201" to-port="0"/>
-		<edge from-layer="200" from-port="1" to-layer="201" to-port="1"/>
-		<edge from-layer="201" from-port="2" to-layer="202" to-port="0"/>
-		<edge from-layer="202" from-port="1" to-layer="204" to-port="0"/>
+		<edge from-layer="189" from-port="2" to-layer="200" to-port="0"/>
+		<edge from-layer="200" from-port="3" to-layer="202" to-port="0"/>
+		<edge from-layer="201" from-port="1" to-layer="202" to-port="1"/>
+		<edge from-layer="202" from-port="2" to-layer="204" to-port="0"/>
 		<edge from-layer="203" from-port="1" to-layer="204" to-port="1"/>
 		<edge from-layer="204" from-port="2" to-layer="205" to-port="0"/>
 		<edge from-layer="205" from-port="1" to-layer="207" to-port="0"/>
 		<edge from-layer="206" from-port="1" to-layer="207" to-port="1"/>
-		<edge from-layer="207" from-port="2" to-layer="208" to-port="0"/>
-		<edge from-layer="208" from-port="3" to-layer="210" to-port="0"/>
-		<edge from-layer="209" from-port="1" to-layer="210" to-port="1"/>
-		<edge from-layer="210" from-port="2" to-layer="212" to-port="0"/>
+		<edge from-layer="133" from-port="2" to-layer="209" to-port="0"/>
+		<edge from-layer="208" from-port="1" to-layer="209" to-port="1"/>
+		<edge from-layer="209" from-port="2" to-layer="210" to-port="0"/>
+		<edge from-layer="210" from-port="1" to-layer="212" to-port="0"/>
 		<edge from-layer="211" from-port="1" to-layer="212" to-port="1"/>
-		<edge from-layer="212" from-port="2" to-layer="213" to-port="0"/>
-		<edge from-layer="213" from-port="1" to-layer="215" to-port="0"/>
-		<edge from-layer="214" from-port="1" to-layer="215" to-port="1"/>
-		<edge from-layer="133" from-port="2" to-layer="217" to-port="0"/>
-		<edge from-layer="216" from-port="1" to-layer="217" to-port="1"/>
-		<edge from-layer="217" from-port="2" to-layer="218" to-port="0"/>
-		<edge from-layer="218" from-port="1" to-layer="220" to-port="0"/>
-		<edge from-layer="219" from-port="1" to-layer="220" to-port="1"/>
-		<edge from-layer="199" from-port="2" to-layer="221" to-port="0"/>
-		<edge from-layer="215" from-port="2" to-layer="221" to-port="1"/>
-		<edge from-layer="220" from-port="2" to-layer="221" to-port="2"/>
+		<edge from-layer="199" from-port="2" to-layer="213" to-port="0"/>
+		<edge from-layer="207" from-port="2" to-layer="213" to-port="1"/>
+		<edge from-layer="212" from-port="2" to-layer="213" to-port="2"/>
 	</edges>
 	<meta_data>
 		<MO_version value="2019.3.0-408-gac8584cb7"/>
 		<cli_parameters>
-			<batch value="1"/>
 			<blobs_as_inputs value="False"/>
-			<data_type value="float"/>
+			<data_type value="FP16"/>
 			<disable_nhwc_to_nchw value="False"/>
 			<disable_resnet_optimization value="False"/>
 			<enable_concat_optimization value="False"/>
@@ -4729,23 +4591,27 @@
 			<framework value="tf"/>
 			<freeze_placeholder_with_value value="{}"/>
 			<generate_experimental_IR_V10 value="False"/>
+			<input value="image_tensor"/>
 			<input_model value="DIR/frozen_inference_graph.pb"/>
 			<input_model_is_text value="False"/>
+			<input_shape value="[1,600,600,3]"/>
 			<keep_quantize_ops_in_IR value="False"/>
 			<keep_shape_ops value="False"/>
 			<log_level value="ERROR"/>
 			<mean_scale_values value="{}"/>
 			<mean_values value="()"/>
 			<move_to_preprocess value="False"/>
+			<output value="['detection_scores', 'detection_boxes', 'num_detections']"/>
 			<output_dir value="DIR"/>
+			<placeholder_shapes value="{'image_tensor': array([  1, 600, 600,   3])}"/>
 			<reverse_input_channels value="True"/>
 			<scale_values value="()"/>
 			<silent value="False"/>
 			<steps value="False"/>
 			<tensorflow_object_detection_api_pipeline_config value="DIR/pipeline.config"/>
-			<tensorflow_use_custom_operations_config value="DIR/faster_rcnn_support_api_v1.14.json"/>
+			<tensorflow_use_custom_operations_config value="DIR/faster_rcnn_support.json"/>
 			<version value="False"/>
-			<unset unset_cli_parameters="disable_fusing, disable_gfusing, finegrain_fusing, generate_deprecated_IR_V2, input, input_checkpoint, input_meta_graph, input_shape, model_name, output, placeholder_shapes, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_operation_patterns, tensorflow_subgraph_patterns"/>
+			<unset unset_cli_parameters="batch, disable_fusing, disable_gfusing, finegrain_fusing, generate_deprecated_IR_V2, input_checkpoint, input_meta_graph, model_name, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_operation_patterns, tensorflow_subgraph_patterns"/>
 		</cli_parameters>
 	</meta_data>
 </net>
