@@ -13,6 +13,7 @@ configPath = os.path.join(os.getcwd(), "model", "config.pbtxt")
 
 print("[INFO] loading Faster R-CNN from disk...")
 net = cv2.dnn.readNetFromTensorflow(weightsPath, configPath)
+net.setPreferableTarget(cv2.dnn.DNN)
 
 capture = cv2.VideoCapture(0)
 writer = None
