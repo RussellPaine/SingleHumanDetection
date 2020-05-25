@@ -5,6 +5,7 @@ import argparse
 from filterpy.kalman import KalmanFilter
 
 COLORS = np.random.randint(0, 255, size=(500, 3), dtype="uint8")
+cur_request_id = 0
 
 def convert_bbox_to_xyya(bbox):
     width = bbox[2] - bbox[0]
@@ -286,8 +287,8 @@ def load_desktop_model(modelName):
 def load_portable_model(modelName):
     from openvino.inference_engine import IENetwork, IECore, IEPlugin
     CWD_PATH = os.getcwd()
-    model_xml = os.path.join(os.getcwd(), "pModel", modelName, "frozen_inference_graph.xml")
-    model_bin = os.path.join(os.getcwd(), "pModel", modelName , "frozen_inference_graph.bin")
+    model_xml = os.path.join(os.getcwd(), "pModels", modelName, "frozen_inference_graph.xml")
+    model_bin = os.path.join(os.getcwd(), "pModels", modelName , "frozen_inference_graph.bin")
     plugin = IEPlugin("MYRIAD")
     net = IENetwork(model=model_xml, weights=model_bin)
     plugin.set_config({"VPU_HW_STAGES_OPTIMIZATION": "YES"})
@@ -326,7 +327,7 @@ if  __name__ == "__main__":
     tracker = MOTTracker()
     frame_rate_calc = 1
     freq = cv2.getTickFrequency()
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(1)
 
     while True:
 
@@ -337,7 +338,7 @@ if  __name__ == "__main__":
             bboxes = get_desktop_bboxes(sess, frame, image_tensor, detection_boxes,
                                         detection_scores, detection_classes, num_detections)
         elif str.upper(args["platform"]).strip() == "P" or str.upper(args["platform"]).strip() == "PORTABLE":
-            bboxes = get_bboxes(exec_net, input_blob,
+            bboxes = get_portable_bboxes(exec_net, input_blob,
                                 out_blob, feed_dict, n, c, h, w)
 
         trackers = tracker.update(bboxes)
