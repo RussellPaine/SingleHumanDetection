@@ -327,7 +327,7 @@ if  __name__ == "__main__":
     tracker = MOTTracker()
     frame_rate_calc = 1
     freq = cv2.getTickFrequency()
-    camera = cv2.VideoCapture(1)
+    camera = cv2.VideoCapture(0)
 
     while True:
 
