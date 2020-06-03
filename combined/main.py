@@ -7,6 +7,9 @@ from filterpy.kalman import KalmanFilter
 COLORS = np.random.randint(0, 255, size=(500, 3), dtype="uint8")
 cur_request_id = 0
 
+trackClick = None
+SingleTracker = None
+
 def convert_bbox_to_xyya(bbox):
     width = bbox[2] - bbox[0]
     height = bbox[3] - bbox[1]
@@ -16,6 +19,10 @@ def convert_bbox_to_xyya(bbox):
     Y = width / float(height)  # Aspect Ratio
     return np.array([x, y, a, Y]).reshape((4, 1))
 
+def convert_bbox_to_xywh(bbox):
+    width = bbox[2] - bbox[0]
+    height = bbox[3] - bbox[1]
+    return [bbox[0], bbox[1], width, height]
 
 def convert_xyyh_to_bbox(xyYa, score=None):
     width = np.sqrt(xyYa[2] * xyYa[3])
@@ -29,6 +36,9 @@ def convert_xyyh_to_bbox(xyYa, score=None):
     else:
         return np.array([x1, y1, x2, y2, score]).reshape((1, 5))
 
+# Begin Reference - Copied and Modified Code
+# https://github.com/abewley/sort
+# I have modified the SORT algorithm to allow for better tracking and to fit my specification of drawing the past frame to better indicate the tracking of people
 def match_Predictions(detections, trackers, iou_threshold=0.3):
     if len(trackers) == 0:
         return np.empty((0, 2), dtype=int), np.arange(len(detections)), np.empty((0, 5), dtype=int)
@@ -192,16 +202,18 @@ class kalmanTracker(object):
         for hist in self.trackhistory:
             h.append(hist[0])
         return h
+#  End Reference 
 
-def drawPersons(frame, trackers):
+def drawPersons_sort(frame, trackers, length):
     for person in trackers:
+        if SingleTracker != None and SingleTracker != person.classID: continue
         if person.classID != -1:
             color = COLORS[person.classID]
             color = [int(c) for c in color]
             cv2.putText(frame, str(person.classID), (int(person.bbox[0]) + 5, int(person.bbox[1]) + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
             cv2.rectangle(frame, (int(person.bbox[0]), int(person.bbox[1])), (int(person.bbox[2]), int(person.bbox[3])), color, 2)
             prevX, prevY = -1, -1
-            for h in person.history:
+            for h in person.history[-length:]:
                 x = h[0] + (h[2] - h[0]) / 2.
                 y = h[1] + (h[3] - h[1]) / 2.
                 cv2.circle(frame, (int(x), int(y)), 3, color, 2)
@@ -209,6 +221,18 @@ def drawPersons(frame, trackers):
                     cv2.line(frame, (prevX, prevY), (int(x), int(y)), color, 2)
                 prevX = int(x)
                 prevY = int(y)
+    return frame
+
+def drawPersons_deep_sort(frame, tracker):
+    for track in tracker.tracks:
+        if SingleTracker != None and SingleTracker != track.track_id: continue
+        if not track.is_confirmed() or track.time_since_update > 1:
+            continue
+        color = COLORS[track.track_id]
+        color = [int(c) for c in color]
+        bbox = track.to_tlbr()
+        cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
+        cv2.putText(frame, str(track.track_id), (int(bbox[0]) + 5, int(bbox[1]) + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
     return frame
 
 class person():
@@ -305,6 +329,30 @@ def load_portable_model(modelName):
     del net
     return exec_net, input_blob, out_blob, feed_dict, n, c, h, w
 
+def deepsort(tracker):
+    boxs = []
+    confidences = []
+    for b in bboxes:
+        boxs.append(convert_bbox_to_xywh(b))
+        confidences.append(b[4])
+        pass
+    features = encoder(frame, boxs)
+    detections = [Detection(bbox, confidence, feature) for bbox, confidence, feature in zip(boxs, confidences, features)] 
+    boxes = np.array([d.tlwh for d in detections])
+    scores = np.array([d.confidence for d in detections])
+    indices = preprocessing.non_max_suppression(boxes, 1.0, scores)
+    detections = [detections[i] for i in indices]
+    tracker.predict()
+    tracker.update(detections)
+    return detections
+
+def on_click(event, x, y, p1, p2):
+    global trackClick
+    if event == cv2.EVENT_LBUTTONDOWN:
+        trackClick = [x, y]
+
+
+
 if  __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--platform", required=True,
@@ -315,40 +363,82 @@ if  __name__ == "__main__":
                         help="Draw the bounding boxes or not")
     parser.add_argument("-t", "--tracking", type=bool, default=True,
                         help="Draw the tracking line or not")
+    parser.add_argument("-s", "--sorttype", type=str, default="sort",
+                        help="Draw the tracking line or not")
     parser.add_argument("-l", "--length", type=int, default=30,
                         help="Draw a tracking line for a limited time")
+    parser.add_argument("-c", "--camera", type=int, default=0,
+                        help="Draw a tracking line for a limited time")
     args = vars(parser.parse_args())
+
+    sortType = True
+    platform = True
 
     if str.upper(args["platform"]).strip() == "D" or str.upper(args["platform"]).strip() == "desktop":
         sess, image_tensor, detection_boxes, detection_scores, detection_classes, num_detections = load_desktop_model(args["model"])
     elif str.upper(args["platform"]).strip() == "P" or str.upper(args["platform"]).strip() == "PORTABLE":
         exec_net, input_blob, out_blob, feed_dict, n, c, h, w = load_portable_model(args["model"])
+        platform = False
+    
 
-    tracker = MOTTracker()
+    if str.upper(args["sorttype"]).strip() == "SORT":
+        tracker = MOTTracker()
+    elif str.upper(args["sorttype"]).strip() == "DEEPSORT" or "DEEP":
+        #Begin Reference - Copied Code
+        #https://github.com/nwojke/deep_sort
+        #I have used the deep_sort algorithm to compare the feasability of real time tracking.
+        from deep_sort import preprocessing
+        from deep_sort import nn_matching
+        from deep_sort.detection import Detection
+        from deep_sort.tracker import Tracker
+        from deep_sort import generate_detections
+        encoder = generate_detections.create_box_encoder("mars-small128.pb", batch_size=1)
+        metric = nn_matching.NearestNeighborDistanceMetric("cosine", 0.3, None)
+        #End Reference 
+        tracker = Tracker(metric)
+        sortType = False
+
     frame_rate_calc = 1
     freq = cv2.getTickFrequency()
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(args["camera"])
+    
+    
+    # camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    # camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
     while True:
-
+ 
         t1 = cv2.getTickCount()
         ret, frame = camera.read()
 
-        if str.upper(args["platform"]).strip() == "D" or str.upper(args["platform"]).strip() == "DESKTOP":
-            bboxes = get_desktop_bboxes(sess, frame, image_tensor, detection_boxes,
-                                        detection_scores, detection_classes, num_detections)
-        elif str.upper(args["platform"]).strip() == "P" or str.upper(args["platform"]).strip() == "PORTABLE":
-            bboxes = get_portable_bboxes(exec_net, input_blob,
-                                out_blob, feed_dict, n, c, h, w)
+        if platform:
+            bboxes = get_desktop_bboxes(sess, frame, image_tensor, detection_boxes, detection_scores, detection_classes, num_detections)
+        else:
+            bboxes = get_portable_bboxes(exec_net, input_blob, out_blob, feed_dict, n, c, h, w)
 
-        trackers = tracker.update(bboxes)
+        if sortType:
+            if trackClick != None:
+                for t in trackers:
+                    if (trackClick[0] > t.bbox[0] and trackClick[0] < t.bbox[2] and trackClick[1] > t.bbox[1] and trackClick[1] < t.bbox[3]):
+                        SingleTracker = t.classID
+                trackClick = None
+            trackers = tracker.update(bboxes)
+            frame = drawPersons_sort(frame, trackers, args["length"])
+        else:
+            if trackClick != None:
+                for t in tracker.tracks:
+                    bbox = t.to_tlbr()
+                    if (trackClick[0] > bbox[0] and trackClick[0] < bbox[2] and trackClick[1] > bbox[1] and trackClick[1] < bbox[3]):
+                        SingleTracker = t.track_id
+                trackClick = None
+            trackers = deepsort(tracker)
+            frame = drawPersons_deep_sort(frame, tracker)
 
-        frame = drawPersons(frame, trackers)
-
-        cv2.putText(frame, "{0:.2f}".format(frame_rate_calc), (30, 50), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5, (255, 255, 0), 1, cv2.LINE_AA)
+        cv2.putText(frame, "{0:.2f}".format(frame_rate_calc), (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 1, cv2.LINE_AA)
 
         cv2.imshow('frame', frame)
+        cv2.setMouseCallback('frame', on_click)
+
         t2 = cv2.getTickCount()
         time1 = (t2-t1)/freq
         frame_rate_calc = 1/time1
